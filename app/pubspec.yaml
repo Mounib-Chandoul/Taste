@@ -1,0 +1,53 @@
+name: musiclab
+description: Music Lab - self-hosted streaming from your PC.
+publish_to: "none"
+version: 0.1.0
+
+environment:
+  sdk: ">=3.2.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  http: ^1.2.0
+  provider: ^6.1.0
+  # pinned <0.10 for the stable concatenating-audio-source API
+  just_audio: ">=0.9.36 <0.10.0"
+  just_audio_background: ^0.0.1-beta.11
+  shared_preferences: ^2.2.0
+  path_provider: ^2.1.0
+  flutter_riverpod: ^2.6.1
+  go_router: ^14.8.1
+  cached_network_image: ^3.4.1
+  flutter_animate: ^4.5.2
+  phosphor_flutter: ^2.1.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+# phosphor_flutter 2.1.0 subclasses IconData, which became a final class in
+# Flutter 3.50, so the published package no longer compiles. This local copy
+# keeps the same Phosphor glyphs using plain IconData constants.
+dependency_overrides:
+  phosphor_flutter:
+    path: third_party/phosphor_flutter
+
+flutter:
+  uses-material-design: true
+  fonts:
+    - family: Silkscreen
+      fonts:
+        - asset: assets/fonts/Silkscreen-Regular.ttf
+        - asset: assets/fonts/Silkscreen-Bold.ttf
+          weight: 700
+    - family: JetBrainsMono
+      fonts:
+        - asset: assets/fonts/JetBrainsMono-Regular.ttf
+        - asset: assets/fonts/JetBrainsMono-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/JetBrainsMono-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/JetBrainsMono-Bold.ttf
+          weight: 700

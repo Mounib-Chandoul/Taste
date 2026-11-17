@@ -1,0 +1,41 @@
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.egg-info/
+
+# Local state and secrets (never commit real credentials, DBs or tokens)
+.env
+.env.*
+!.env.example
+server/data/
+
+# Dart / Flutter
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+build/
+coverage/
+*.symbols
+app.*.map.json
+
+# IDE / editor
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+
+# OS junk
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Local toolchains, logs
+oracleJdk-27/
+.gradle/
+*.log
