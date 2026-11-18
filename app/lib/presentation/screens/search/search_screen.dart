@@ -151,6 +151,14 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                   ],
                 ),
               ).animate().fadeIn(duration: 180.ms),
+            if (artistResults.isNotEmpty) ...[
+              _ResultsHeader('ARTISTS', artistResults.length, colors.purple),
+              const SizedBox(height: 8),
+              ..._staggerList([
+                for (final a in artistResults) _ArtistResult(artist: a),
+              ]),
+              const SizedBox(height: 14),
+            ],
             if (trackResults.isNotEmpty) ...[
               _ResultsHeader('SONGS', trackResults.length, colors.cyan),
               const SizedBox(height: 8),
@@ -161,14 +169,6 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                     queue: trackResults,
                     index: i,
                   ),
-              ]),
-              const SizedBox(height: 14),
-            ],
-            if (artistResults.isNotEmpty) ...[
-              _ResultsHeader('ARTISTS', artistResults.length, colors.purple),
-              const SizedBox(height: 8),
-              ..._staggerList([
-                for (final a in artistResults) _ArtistResult(artist: a),
               ]),
               const SizedBox(height: 14),
             ],

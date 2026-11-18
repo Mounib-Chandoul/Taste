@@ -9,6 +9,7 @@ import 'package:phosphor_flutter/phosphor_flutter.dart';
 import '../../../core/core.dart';
 import '../../../data/models/models.dart';
 import '../../providers/app_providers.dart';
+import '../../widgets/mini_player.dart';
 
 class _AlbumItem {
   const _AlbumItem({
@@ -272,6 +273,13 @@ class ArtistScreen extends ConsumerWidget {
                 ),
               ),
           ],
+        ),
+      ),
+      bottomNavigationBar: SafeArea(
+        top: false,
+        child: MiniPlayer(
+          enableHero: false,
+          onExpand: () => context.push('/now-playing'),
         ),
       ),
     );

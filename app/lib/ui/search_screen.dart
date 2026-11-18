@@ -169,6 +169,27 @@ class _Results extends StatelessWidget {
           ),
           _TopResult(hit: top),
         ],
+        if (artists.isNotEmpty) ...[
+          const SizedBox(height: 12),
+          _Section("Artists", "${artists.length}"),
+          for (final hit in artists.take(8))
+            ListTile(
+              leading: ClipOval(
+                child: SizedBox(
+                  width: 44,
+                  height: 44,
+                  child: hit.item.coverAlbum != null
+                      ? AuthCover(albumId: hit.item.coverAlbum!.id)
+                      : const Icon(Icons.person),
+                ),
+              ),
+              title: Text(hit.item.name),
+              onTap: () => Navigator.of(context).push(
+                MaterialPageRoute<void>(
+                    builder: (_) => ArtistScreen(artist: hit.item)),
+              ),
+            ),
+        ],
         if (tracks.isNotEmpty) ...[
           const SizedBox(height: 12),
           _Section("Songs", "${tracks.length}"),
@@ -194,27 +215,6 @@ class _Results extends StatelessWidget {
               ),
             ),
           ),
-        ],
-        if (artists.isNotEmpty) ...[
-          const SizedBox(height: 12),
-          _Section("Artists", "${artists.length}"),
-          for (final hit in artists.take(8))
-            ListTile(
-              leading: ClipOval(
-                child: SizedBox(
-                  width: 44,
-                  height: 44,
-                  child: hit.item.coverAlbum != null
-                      ? AuthCover(albumId: hit.item.coverAlbum!.id)
-                      : const Icon(Icons.person),
-                ),
-              ),
-              title: Text(hit.item.name),
-              onTap: () => Navigator.of(context).push(
-                MaterialPageRoute<void>(
-                    builder: (_) => ArtistScreen(artist: hit.item)),
-              ),
-            ),
         ],
       ],
     );

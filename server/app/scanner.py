@@ -150,6 +150,9 @@ def _scan(music_dir: str) -> None:
                 if album.id not in used_album_ids:
                     session.delete(album)
 
+            # Make the orphan deletions visible to the index rebuild below.
+            session.flush()
+
             bump_library_revision(session)
             rebuild_search_index(session)
 

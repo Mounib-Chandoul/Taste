@@ -9,10 +9,18 @@ import '../providers/app_providers.dart';
 import 'equalizer_bars.dart';
 
 class MiniPlayer extends ConsumerStatefulWidget {
-  const MiniPlayer({super.key, required this.onExpand});
+  const MiniPlayer({
+    super.key,
+    required this.onExpand,
+    this.enableHero = true,
+  });
 
   /// Called when the user taps or swipes up to open full Now Playing.
   final VoidCallback onExpand;
+
+  /// Set false when another MiniPlayer is already mounted in the same
+  /// Navigator subtree (e.g. an artist profile pushed over the app shell).
+  final bool enableHero;
 
   @override
   ConsumerState<MiniPlayer> createState() => _MiniPlayerState();
@@ -96,25 +104,28 @@ class _MiniPlayerState extends ConsumerState<MiniPlayer> {
                 const SizedBox(height: 6),
                 Row(
                   children: [
-                    Hero(
-                      tag: 'now-playing-art-${track.id}',
-                      child: Container(
-                        width: 46,
-                        height: 46,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(color: colors.border, width: 2),
-                          color: colors.cardElevated,
-                        ),
-                        clipBehavior: Clip.antiAlias,
-                        child: CachedNetworkImage(
-                          imageUrl: track.albumArtUrl,
-                          fit: BoxFit.cover,
-                          placeholder: (_, __) =>
-                              Container(color: colors.cardElevated),
-                          errorWidget: (_, __, ___) => Icon(
-                            PhosphorIconsRegular.musicNotes,
-                            color: colors.textSecondary,
+                    HeroMode(
+                      enabled: widget.enableHero,
+                      child: Hero(
+                        tag: 'now-playing-art-${track.id}',
+                        child: Container(
+                          width: 46,
+                          height: 46,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(color: colors.border, width: 2),
+                            color: colors.cardElevated,
+                          ),
+                          clipBehavior: Clip.antiAlias,
+                          child: CachedNetworkImage(
+                            imageUrl: track.albumArtUrl,
+                            fit: BoxFit.cover,
+                            placeholder: (_, __) =>
+                                Container(color: colors.cardElevated),
+                            errorWidget: (_, __, ___) => Icon(
+                              PhosphorIconsRegular.musicNotes,
+                              color: colors.textSecondary,
+                            ),
                           ),
                         ),
                       ),
